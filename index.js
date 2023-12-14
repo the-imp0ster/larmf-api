@@ -45,7 +45,7 @@ app.get('/larmf/:edition', (req, res) => {
         return res.status(400).send('edition number must be a valid number');
     }
 
-    let data = readLarmfData('nft_metadata.json');
+    let data = readLarmfData('larmf_metadata.json');
     let larmf = findLarmf(data, editionNumber);
 
     if (larmf) {
@@ -61,7 +61,7 @@ app.get('/larmf/:edition', (req, res) => {
 // ex. localhost:3000/larmfs/type/Peachy returns json array of all peachy larmfs
 app.get('/larmfs/type/:type', (req, res) => {
     let type = req.params.type;
-    let data = readLarmfData('nft_metadata.json');
+    let data = readLarmfData('larmf_metadata.json');
     let larmfsByType = findLarmfsByType(data, type);
 
     if (larmfsByType.length > 0) {
@@ -83,7 +83,7 @@ app.get('/larmfs/stats/:stat/:value', (req, res) => {
         return res.status(400).send('stat value must be a valid number');
     }
 
-    let data = readLarmfData('nft_metadata.json');
+    let data = readLarmfData('larmf_metadata.json');
     let larmfsByStat = findLarmfsByStat(data, statType, statValue);
 
     if (larmfsByStat.length > 0) {
@@ -103,7 +103,7 @@ app.get('/larmfs/luckynumber/:number', (req, res) => {
         return res.status(400).send('lucky number must be a valid number');
     }
 
-    let data = readLarmfData('nft_metadata.json');
+    let data = readLarmfData('larmf_metadata.json');
     let larmfsWithLuckyNumber = findLarmfsByLuckyNumber(data, number);
 
     if (larmfsWithLuckyNumber.length > 0) {
