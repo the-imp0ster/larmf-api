@@ -1,6 +1,8 @@
 function describe_traits(larmf) {
     const { stats, attributes } = larmf;
     const { type } = stats;
+    // we can also provide descriptions for the stat levels
+    
 
     let extractedAttributes = {};
     attributes.forEach(trait => {
@@ -36,89 +38,71 @@ function describe_traits(larmf) {
             }
         },
 
-
         mouth: function() {
             switch (mouth) {
                 case 'Smile':
-                    return `with a soft smile`;
+                    return `and a big smile`;
                 case 'Normal':
-                    return `with a normal expression`;
+                    return `and a content facial expression`;
                 case 'Chiclets':
-                    return `showing chiclets`;
+                    return `and buck front teeth`;
                 case 'Black_Beard':
-                    return `with a black beard`;
+                    return `and a black beard`;
                 case 'Ginger_Beard':
-                    return `with a ginger beard`;
+                    return `and a ginger beard`;
                 case 'Smirk':
-                    return `smirking`;
+                    return `and a smirking facial expression`;
                 case 'Blonde_Handle_Bars':
-                    return `with a blonde handle bar moustache`;
+                    return `and a blonde handlebar moustache`;
                 case 'Black_Handle_Bars':
-                    return `with a black handle bar moustache`;
+                    return `and a black handlebar moustache`;
                 case 'Gronk':
-                    return `with a gronk expression`;
+                    return `and a gronk expression`;
                 case 'Zombie':
-                    return `with a drooling zombie mouth`;
+                    return `and a drooling zombie mouth`;
                 case 'Fangs':
-                    return `showing sharp fangs`;
+                    return `and sharp fangs`;
                 case 'Gold_Grill':
-                    return `with a gold grill`;
+                    return `and a gold grill`;
                 default:
-                    return `with a straight face`;
-            }
-        },
-
-        headphones: function() {
-            switch (headphones) {
-                case 'Gray':
-                    return 'wearing gray headphones';
-                case 'Red':
-                    return 'wearing red headphones';
-                case 'Blue':
-                    return 'wearing blue headphones';
-                case 'White':
-                    return 'wearing white headphones';
-                case 'Striped':
-                    return 'wearing striped headphones';
-                default:
-                    return '';
+                    return `and a straight face`;
             }
         },
 
         type: function() {
             switch (type.toLowerCase()) {
                 case 'peachy':
-                    return 'with a soft peach-colored body';
+                    return 'with a soft peach-colored body,';
                 case 'taffy':
-                    return 'with a taffy pink body';
+                    return 'with a taffy pink body,';
                 case 'leafy':
-                    return 'with a minty green body';
+                    return 'with a minty green body,';
                 case 'creamy':
-                    return 'with a light tan body';
+                    return 'with a light tan body,';
                 case 'chilly':
-                    return 'with an icy white body';
+                    return 'with an icy white body,';
                 case 'moon':
-                    return 'with a pale moon-like luminescent body';
+                    return 'with a pale moon-like luminescent body,';
                 case 'sandy':
-                    return 'with a warm sandy beige body';
+                    return 'with a warm sandy beige body,';
                 case 'slate':
-                    return 'with a light slate gray body';
+                    return 'with a light slate gray body,';
                 case 'cinnamon':
-                    return 'with a warm cinnamon-brown body';
+                    return 'with a warm cinnamon-brown body,';
                 case 'earthy':
-                    return 'with an earthy rich brown spotted body';
+                    return 'with an earthy rich brown spotted body,';
                 case 'zombie':
-                    return 'with a ghastly green, zombie-like body and red eyes';
+                    return 'with a ghastly green, zombie-like body and red eyes,';
                 case 'ape':
-                    return 'with a deep monkey fur-brown body';
+                    return 'with a deep monkey fur-brown body,';
                 case 'alien':
-                    return 'with a light blue otherworldly body and square blue alien eyes';
+                    return 'with a light blue otherworldly body and square blue alien eyes,';
                 case 'chrome':
-                    return 'with a shiny, reflective chrome body';
+                    return 'with a shiny, reflective chrome body,';
                 case 'gold':
-                    return 'with a treasure-like golden body';
+                    return 'with a treasure-like golden body,';
                 default:
-                    return 'with a unique and indescribable color, as larmf colors are,';
+                    return 'with a unique and indescribable color,';
             }
         },
 
@@ -178,32 +162,29 @@ function describe_traits(larmf) {
             }
         },
            
-
         eyewear: function() {
             switch (eyewear) {
                 case 'Small_Shades':
-                    return 'wearing small sunglasses';
+                    return 'small sunglasses';
                 case 'Regular_Shades':
-                    return 'wearing sunglasses';
+                    return 'sunglasses';
                 case 'Classic_Shades':
-                    return 'wearing classic sunglasses';
+                    return 'classic sunglasses';
                 case 'Horned_Rim_Glasses':
-                    return 'wearing horn-rimmed eyeglasses';
+                    return 'horn-rimmed eyeglasses';
                 case 'Eye_Patch':
-                    return 'wearing an eye patch';
+                    return 'an eye patch';
                 case 'AR':
-                    return 'wearing a futuristic sci-fi eyepiece';
+                    return 'a futuristic sci-fi eyepiece';
                 case 'VR':
-                    return 'wearing virtual reality goggles';
+                    return 'virtual reality goggles';
                 case '3D_Glasses':
-                    return 'wearing 3D glasses';
+                    return '3D glasses';
                 default:
-                    return 'with regular beady eyes';
+                    return `beady round eyes`;
             }
         },
         
-
-
         headwear: function() {
             switch (headwear) {
                 case 'Pink_Headband':
@@ -258,6 +239,23 @@ function describe_traits(larmf) {
                     return '';
             }
         },
+
+        headphones: function() {
+            switch (headphones) {
+                case 'Gray':
+                    return 'wearing gray headphones';
+                case 'Red':
+                    return 'wearing red headphones';
+                case 'Blue':
+                    return 'wearing blue headphones';
+                case 'White':
+                    return 'wearing white headphones';
+                case 'Striped':
+                    return 'wearing striped headphones';
+                default:
+                    return '';
+            }
+        },
         
     };
 
@@ -269,11 +267,12 @@ function describe_traits(larmf) {
 
     
     return [
-        'a simply-drawn cartoonish worm character',
+        'A simply-drawn cartoonish worm character',
         phrases.type(type),
         phrases.eyewear(eyewear),
-        phrases.mouth(mouth) + phrases.smoke(smoke),
-        'The worm has ',
+        phrases.mouth(mouth),
+        phrases.smoke(smoke),
+        '. The worm ',
         combine([
             phrases.hair(hair),
             phrases.headphones(headphones),

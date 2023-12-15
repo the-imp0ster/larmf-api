@@ -8,6 +8,7 @@ The LARMF API is a work in progress that allows users to get data about specific
 - Retrieve all larmfs of a particular type.
 - Find larmfs with a specific stat value.
 - Get larmfs with a particular lucky number.
+- Generate a descriptive text for a larmf based on its traits (NEW, WIP)
 
 ## Setup
 1. Make sure you have Node.js installed.
@@ -36,8 +37,18 @@ The LARMF API is a work in progress that allows users to get data about specific
 - Returns all larmfs with a specified lucky number.
 - Example: `localhost:3000/larmfs/luckynumber/7`
 
+### Get Larmf Description
+- `GET /larmf/description/:edition`
+  - Generates and retrieves a descriptive text for a larmf based on its traits.
+  - Example: `localhost:3000/larmf/description/2`
+
+
 ## Running the Server
-In a terminal in your project folder, run `node index.js` to start the server. The API will be available at `http://localhost:3000`.  You are welcome to change the port.
+In a terminal in your project folder, run `node index.js` to start the server. The API will be available at `http://localhost:3000`.
 
 ## Data File
-The API uses a JSON file (`nft_metadata.json` as a test file of 10 larmfs, `larmf_metadata.json` as the full array of 6300 larmfs) for storing larmf data. Ensure this file is correctly formatted and available in the project directory before running the program.
+- The API uses a JSON file for storing larmf data.
+- Two JSON files are included: 
+  - `nft_metadata.json` for testing with 10 larmfs.
+  - `larmf_metadata.json` for the full dataset of 6300 larmfs.
+- Ensure these files are correctly formatted and placed in the project directory.

@@ -132,15 +132,15 @@ app.get('/larmfs/luckynumber/:number', (req, res) => {
 // •┈••✦ ❤ ✦••┈• get a larmf's description (*WIP for GPT)
 // ex. localhost:3000/larmf/description/2 
 app.get('/larmf/description/:edition', (req, res) => {
-    const editionNumber = parseInt(req.params.edition, 10);
+    let editionNumber = parseInt(req.params.edition, 10);
     if (isNaN(editionNumber)) {
         return res.status(400).send('Edition number must be a valid number');
     }
 
-    const description = getLarmfDescription(editionNumber);
+    let description = getLarmfDescription(editionNumber);
     if (description) {
-        console.log(description); 
-        res.send(description);   
+        console.log(description);
+        res.send(description);
     } else {
         res.status(404).send('Larmf not found');
     }
