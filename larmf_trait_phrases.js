@@ -2,7 +2,7 @@
 
 function describe_traits(larmf) {
     let { stats, attributes } = larmf;
-    // type can be accessed outside the stats array but i've accessed it in the stats object so i can add the other stats easily if we decide to do that
+    // type can be accessed outside the stats but i've accessed it in the stats object so i can add the other stats easily if we decide to do that
     // could be fun to add descriptions for the stats as well :)
     let { type } = stats;
 
@@ -12,6 +12,10 @@ function describe_traits(larmf) {
     attributes.forEach(trait => {
         extractedAttributes[trait.trait_type] = trait.value;
     });
+
+
+    let specialTypes = ["zombie", "ape", "alien"];
+    let isSpecialType = specialTypes.includes(type.toLowerCase());
 
     let smoke = extractedAttributes.Smoke;
     let mouth = extractedAttributes.Mouth;
@@ -27,6 +31,12 @@ function describe_traits(larmf) {
     let phrases = {
         type: function () {
             switch (type.toLowerCase()) {
+                case 'zombie':
+                    return 'with a ghastly green, zombie-like body, glowing red eyes, and a drooling mouth,';
+                case 'ape':
+                    return 'with a deep monkey fur-brown body, large round monkey eyes, and a slight frown';
+                case 'alien':
+                    return 'with a light blue otherworldly body, square blue alien eyes, and a serious facial expression';
                 case 'peachy':
                     return 'with a soft peach-colored body,';
                 case 'taffy':
@@ -47,17 +57,12 @@ function describe_traits(larmf) {
                     return 'with a warm cinnamon-brown body,';
                 case 'earthy':
                     return 'with an earthy rich brown spotted body,';
-                case 'zombie':
-                    return 'with a ghastly green, zombie-like body, glowing red eyes, and a drooling mouth,';
-                case 'ape':
-                    return 'with a deep monkey fur-brown body, large round monkey eyes, and a slight frown';
-                case 'alien':
-                    return 'with a light blue otherworldly body, square blue alien eyes, and a serious facial expression';
                 case 'chrome':
                     return 'with a shiny, reflective chrome body,';
                 case 'gold':
                     return 'with a treasure-like golden body,';
                 default:
+                    // TODO make one of the traits the default, made this one up
                     return 'with a unique and indescribable color,';
             }
         },
@@ -80,39 +85,46 @@ function describe_traits(larmf) {
         },
 
         mouth: function () {
-            switch (mouth) {
-                case 'Smile':
-                    return `and a big smile`;
-                case 'Normal':
-                    return `and a content facial expression`;
-                case 'Chiclets':
-                    return `and buck front teeth`;
-                case 'Black_Beard':
-                    return `and a black beard`;
-                case 'Ginger_Beard':
-                    return `and a ginger beard`;
-                case 'Smirk':
-                    return `and a smirking facial expression`;
-                case 'Blonde_Handle_Bars':
-                    return `and a blonde handlebar moustache`;
-                case 'Black_Handle_Bars':
-                    return `and a black handlebar moustache`;
-                case 'Gronk':
-                    return `and a gronk expression`;
-                case 'Zombie':
-                    return `and a drooling zombie mouth`;
-                case 'Fangs':
-                    return `and sharp fangs`;
-                case 'Gold_Grill':
-                    return `and a gold grill`;
-                default:
-                    return `and a straight face`;
+            if (!isSpecialType) {
+
+                switch (mouth) {
+                    case 'Smile':
+                        return `and a big smile`;
+                    case 'Normal':
+                        return `and a content facial expression`;
+                    case 'Chiclets':
+                        return `and buck front teeth`;
+                    case 'Black_Beard':
+                        return `and a black beard`;
+                    case 'Ginger_Beard':
+                        return `and a ginger beard`;
+                    case 'Smirk':
+                        return `and a smirking facial expression`;
+                    case 'Blonde_Handle_Bars':
+                        return `and a blonde handlebar moustache`;
+                    case 'Black_Handle_Bars':
+                        return `and a black handlebar moustache`;
+                    case 'Gronk':
+                        return `and a gronk expression`;
+                    case 'Zombie':
+                        return `and a drooling zombie mouth`;
+                    case 'Fangs':
+                        return `and sharp fangs`;
+                    case 'Gold_Grill':
+                        return `and a gold grill`;
+                    default:
+                        // TODO can't remember if i covered this trait in the cases above, check
+                        return `and a straight face`;
+                }
             }
         },
 
 
 
         hair: function () {
+            if (hair === 'None') {
+                return '';
+            }
             switch (hair) {
                 case 'Messy':
                     return 'with messy dishevelled black hair';
@@ -142,8 +154,8 @@ function describe_traits(larmf) {
                     return 'with big wild lime-colored hair';
                 case 'Wild_Candy':
                     return 'with big wild candy-colored hair';
-                default:
-                    return 'no hair';
+                    default:
+                        return '';
             }
         },
 
@@ -164,6 +176,7 @@ function describe_traits(larmf) {
                 case 'Diamond':
                     return 'wearing a diamond earring in the left ear';
                 default:
+                    // "None" earring trait case
                     return '';
             }
         },
@@ -266,29 +279,30 @@ function describe_traits(larmf) {
             }
         },
 
+        // build up the physical description string with the different parts
+        getDescription: function () {
+            let descriptionParts = [
+                this.type(),
+                this.headwear(),
+                this.eyewear(),
+                isSpecialType ? "" : this.mouth(),
+                hair === "None" ? "bald" : this.hair(),
+                this.smoke(),
+                this.earrings(),
+                this.headphones()
+            ];
+
+
+            // we're gonna filter out any empty strings and concat. with spaces
+            return descriptionParts.filter(Boolean).join(' ').trim() + '.';
+        }
+
     };
 
-    function combine(phrasesArray) {
-        return phrasesArray.filter(p => p && p.length > 0).join(', ');
-    }
 
-
-
-
-    return [
-        'A simply-drawn cartoonish worm character',
-        phrases.type(type),
-        phrases.eyewear(eyewear),
-        phrases.mouth(mouth),
-        phrases.smoke(smoke),
-        '. The worm has',
-        combine([
-            phrases.hair(hair),
-            phrases.headphones(headphones),
-            phrases.earrings(earrings),
-            phrases.headwear(headwear)
-        ])
-    ].filter(s => s && s.length > 0).join(' ').replaceAll(' .', '.');
+    let fullDescription = phrases.getDescription.call(phrases);
+    return `A simply-drawn cartoonish short, stumpy larva character ${fullDescription}.`;
+ 
 }
 
 module.exports = { describe_traits };

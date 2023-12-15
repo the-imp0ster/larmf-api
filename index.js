@@ -50,8 +50,6 @@ function getLarmfDescription(editionNumber) {
 }
 
 
-
-
 // •┈••✦ ❤ ✦••┈• get larmf by id
 // ex. localhost:3000/larmf/2 is metadata for larmf #2
 app.get('/larmf/:edition', (req, res) => {
@@ -130,7 +128,7 @@ app.get('/larmfs/luckynumber/:number', (req, res) => {
 
 
 // •┈••✦ ❤ ✦••┈• get a larmf's description (*WIP for GPT)
-// ex. localhost:3000/larmf/description/2 
+// ex. localhost:3000/larmf/description/2 retrieves a a description of the larmf's appearance that can be used for an image generator prompt, as alt text, etc.
 app.get('/larmf/description/:edition', (req, res) => {
     let editionNumber = parseInt(req.params.edition, 10);
     if (isNaN(editionNumber)) {
