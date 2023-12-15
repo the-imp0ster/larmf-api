@@ -1,27 +1,68 @@
+
+
 function describe_traits(larmf) {
-    const { stats, attributes } = larmf;
-    const { type } = stats;
-    // we can also provide descriptions for the stat levels
-    
+    let { stats, attributes } = larmf;
+    // type can be accessed outside the stats array but i've accessed it in the stats object so i can add the other stats easily if we decide to do that
+    // could be fun to add descriptions for the stats as well :)
+    let { type } = stats;
+
+
 
     let extractedAttributes = {};
     attributes.forEach(trait => {
         extractedAttributes[trait.trait_type] = trait.value;
     });
 
-    const smoke = extractedAttributes.Smoke;
-    const mouth = extractedAttributes.Mouth;
-    const headphones = extractedAttributes.Headphones;
-    const hair = extractedAttributes.Hair;
-    const earrings = extractedAttributes.Earring;
-    const eyewear = extractedAttributes.Eyewear;
-    const headwear = extractedAttributes.Headwear;
-    
-    
-    
+    let smoke = extractedAttributes.Smoke;
+    let mouth = extractedAttributes.Mouth;
+    let headphones = extractedAttributes.Headphones;
+    let hair = extractedAttributes.Hair;
+    let earrings = extractedAttributes.Earring;
+    let eyewear = extractedAttributes.Eyewear;
+    let headwear = extractedAttributes.Headwear;
+
+
+
 
     let phrases = {
-        smoke: function() {
+        type: function () {
+            switch (type.toLowerCase()) {
+                case 'peachy':
+                    return 'with a soft peach-colored body,';
+                case 'taffy':
+                    return 'with a taffy pink body,';
+                case 'leafy':
+                    return 'with a minty green body,';
+                case 'creamy':
+                    return 'with a light tan body,';
+                case 'chilly':
+                    return 'with an icy white body,';
+                case 'moon':
+                    return 'with a pale moon-like luminescent body,';
+                case 'sandy':
+                    return 'with a warm sandy beige body,';
+                case 'slate':
+                    return 'with a light slate gray body,';
+                case 'cinnamon':
+                    return 'with a warm cinnamon-brown body,';
+                case 'earthy':
+                    return 'with an earthy rich brown spotted body,';
+                case 'zombie':
+                    return 'with a ghastly green, zombie-like body, glowing red eyes, and a drooling mouth,';
+                case 'ape':
+                    return 'with a deep monkey fur-brown body, large round monkey eyes, and a slight frown';
+                case 'alien':
+                    return 'with a light blue otherworldly body, square blue alien eyes, and a serious facial expression';
+                case 'chrome':
+                    return 'with a shiny, reflective chrome body,';
+                case 'gold':
+                    return 'with a treasure-like golden body,';
+                default:
+                    return 'with a unique and indescribable color,';
+            }
+        },
+
+        smoke: function () {
             switch (smoke) {
                 case 'Doobie':
                     return ' and smoking a doobie';
@@ -38,7 +79,7 @@ function describe_traits(larmf) {
             }
         },
 
-        mouth: function() {
+        mouth: function () {
             switch (mouth) {
                 case 'Smile':
                     return `and a big smile`;
@@ -69,44 +110,9 @@ function describe_traits(larmf) {
             }
         },
 
-        type: function() {
-            switch (type.toLowerCase()) {
-                case 'peachy':
-                    return 'with a soft peach-colored body,';
-                case 'taffy':
-                    return 'with a taffy pink body,';
-                case 'leafy':
-                    return 'with a minty green body,';
-                case 'creamy':
-                    return 'with a light tan body,';
-                case 'chilly':
-                    return 'with an icy white body,';
-                case 'moon':
-                    return 'with a pale moon-like luminescent body,';
-                case 'sandy':
-                    return 'with a warm sandy beige body,';
-                case 'slate':
-                    return 'with a light slate gray body,';
-                case 'cinnamon':
-                    return 'with a warm cinnamon-brown body,';
-                case 'earthy':
-                    return 'with an earthy rich brown spotted body,';
-                case 'zombie':
-                    return 'with a ghastly green, zombie-like body and red eyes,';
-                case 'ape':
-                    return 'with a deep monkey fur-brown body,';
-                case 'alien':
-                    return 'with a light blue otherworldly body and square blue alien eyes,';
-                case 'chrome':
-                    return 'with a shiny, reflective chrome body,';
-                case 'gold':
-                    return 'with a treasure-like golden body,';
-                default:
-                    return 'with a unique and indescribable color,';
-            }
-        },
 
-        hair: function() {
+
+        hair: function () {
             switch (hair) {
                 case 'Messy':
                     return 'with messy dishevelled black hair';
@@ -141,7 +147,7 @@ function describe_traits(larmf) {
             }
         },
 
-        earrings: function() {
+        earrings: function () {
             switch (earrings) {
                 case 'Silver_Hoop':
                     return 'wearing a silver hoop earring in the left ear';
@@ -161,31 +167,34 @@ function describe_traits(larmf) {
                     return '';
             }
         },
-           
-        eyewear: function() {
-            switch (eyewear) {
-                case 'Small_Shades':
-                    return 'small sunglasses';
-                case 'Regular_Shades':
-                    return 'sunglasses';
-                case 'Classic_Shades':
-                    return 'classic sunglasses';
-                case 'Horned_Rim_Glasses':
-                    return 'horn-rimmed eyeglasses';
-                case 'Eye_Patch':
-                    return 'an eye patch';
-                case 'AR':
-                    return 'a futuristic sci-fi eyepiece';
-                case 'VR':
-                    return 'virtual reality goggles';
-                case '3D_Glasses':
-                    return '3D glasses';
-                default:
-                    return `beady round eyes`;
+
+        eyewear: function () {
+            if (!isSpecialType) {
+
+                switch (eyewear) {
+                    case 'Small_Shades':
+                        return 'small sunglasses';
+                    case 'Regular_Shades':
+                        return 'sunglasses';
+                    case 'Classic_Shades':
+                        return 'classic sunglasses';
+                    case 'Horned_Rim_Glasses':
+                        return 'horn-rimmed eyeglasses';
+                    case 'Eye_Patch':
+                        return 'an eye patch';
+                    case 'AR':
+                        return 'a futuristic sci-fi eyepiece';
+                    case 'VR':
+                        return 'virtual reality goggles';
+                    case '3D_Glasses':
+                        return '3D glasses';
+                    case 'None':
+                        return `beady round eyes`;
+                }
             }
         },
-        
-        headwear: function() {
+
+        headwear: function () {
             switch (headwear) {
                 case 'Pink_Headband':
                     return 'wearing a pink and white headband';
@@ -240,7 +249,7 @@ function describe_traits(larmf) {
             }
         },
 
-        headphones: function() {
+        headphones: function () {
             switch (headphones) {
                 case 'Gray':
                     return 'wearing gray headphones';
@@ -256,7 +265,7 @@ function describe_traits(larmf) {
                     return '';
             }
         },
-        
+
     };
 
     function combine(phrasesArray) {
@@ -265,14 +274,14 @@ function describe_traits(larmf) {
 
 
 
-    
+
     return [
         'A simply-drawn cartoonish worm character',
         phrases.type(type),
         phrases.eyewear(eyewear),
         phrases.mouth(mouth),
         phrases.smoke(smoke),
-        '. The worm ',
+        '. The worm has',
         combine([
             phrases.hair(hair),
             phrases.headphones(headphones),
