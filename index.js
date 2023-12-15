@@ -6,6 +6,9 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
+const { describe_traits } = require('./larmf_trait_phrases');
+
+
 // parse thru the json file so the program can read it
 function readLarmfData(filename) {
     let rawData = fs.readFileSync(filename);
@@ -32,6 +35,18 @@ function findLarmfsByStat(data, statType, statValue) {
 // retrieve the larmfs with a specific lucky number
 function findLarmfsByLuckyNumber(data, luckyNumber) {
     return data.filter(item => item.lucky_number === luckyNumber);
+}
+
+// get the larmf's physical description based on its traits
+function getLarmfDescription(editionNumber) {
+    const data = readLarmfData('larmf_metadata.json');
+    const larmf = data.find(item => item.edition === editionNumber);
+
+    if (larmf) {
+        return describe_traits(larmf);
+    } else {
+        return null;
+    }
 }
 
 
@@ -112,6 +127,25 @@ app.get('/larmfs/luckynumber/:number', (req, res) => {
         res.status(404).send(`no larmfs found with lucky number ${number}`);
     }
 });
+
+
+// •┈••✦ ❤ ✦••┈• get a larmf's description (*WIP for GPT)
+// ex. localhost:3000/larmf/description/2 
+app.get('/larmf/description/:edition', (req, res) => {
+    const editionNumber = parseInt(req.params.edition, 10);
+    if (isNaN(editionNumber)) {
+        return res.status(400).send('Edition number must be a valid number');
+    }
+
+    const description = getLarmfDescription(editionNumber);
+    if (description) {
+        console.log(description); 
+        res.send(description);   
+    } else {
+        res.status(404).send('Larmf not found');
+    }
+});
+
 
 
 
