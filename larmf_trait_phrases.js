@@ -2,21 +2,22 @@
 
 function describe_traits(larmf) {
     let { stats, attributes } = larmf;
-    // type can be accessed outside the stats but i've accessed it in the stats object so i can add the other stats easily if we decide to do that
+    // type can be accessed in the attributes but i've accessed it in the stats so i can add the other stats easily if we decide to do that
     // could be fun to add descriptions for the stats as well :)
     let { type } = stats;
 
 
-
+    // create an attributes object for the larmf of its traits
     let extractedAttributes = {};
     attributes.forEach(trait => {
         extractedAttributes[trait.trait_type] = trait.value;
     });
 
-
+    // define the three special larmf types; their descriptions are slightly different
     let specialTypes = ["zombie", "ape", "alien"];
     let isSpecialType = specialTypes.includes(type.toLowerCase());
 
+    // isolating the individual traits from the extractedAttributes{}
     let smoke = extractedAttributes.Smoke;
     let mouth = extractedAttributes.Mouth;
     let headphones = extractedAttributes.Headphones;
@@ -26,21 +27,20 @@ function describe_traits(larmf) {
     let headwear = extractedAttributes.Headwear;
 
 
-
-
+// selecting strings based on the larmf's traits to assemble into the description
     let phrases = {
         type: function () {
-            let specialDescriptions = {
+            let specialTypeDescriptions = {
                 'zombie': 'with a ghastly green, zombie-like body, glowing red eyes, and a drooling mouth,',
                 'ape': 'with a fur-brown monkey body, large round monkey eyes, and a slight frown,',
                 'alien': 'with a light blue otherworldly body, square blue alien eyes, and a serious facial expression,'
             };
 
-            if (specialDescriptions[type.toLowerCase()]) {
-                return specialDescriptions[type.toLowerCase()];
+            if (specialTypeDescriptions[type.toLowerCase()]) {
+                return specialTypeDescriptions[type.toLowerCase()];
             }
 
-            let typeDescription = {
+            let typeDescriptions = {
                 'peachy': 'with a soft peach-colored body',
                 'taffy': 'with a taffy pink body',
                 'leafy': 'with a minty green body',
@@ -55,7 +55,7 @@ function describe_traits(larmf) {
                 'gold': 'with a treasure-like golden body',
             }[type.toLowerCase()];
 
-            return typeDescription;
+            return typeDescriptions;
         },
 
 
@@ -192,10 +192,11 @@ function describe_traits(larmf) {
 
 
         // build up the physical description string with the different parts
+        // special types zombie, ape, alien are different from commons
         getDescription: function () {
             let descriptionParts = [
                 this.type(),
-                this.eyewear(),
+                isSpecialType ? "" : this.eyewear(),
                 this.headwear(),
                 isSpecialType ? "" : this.mouth(),
                 // hair === "None" ? "bald" : this.hair(),
@@ -206,13 +207,13 @@ function describe_traits(larmf) {
             ];
 
 
-            // we're gonna filter out any empty strings and concat. with spaces
+            // we're gonna filter out any empty strings and concatenate the pieces together
             return descriptionParts.filter(part => part).join(' ').trim() + '.';
         }
 
     };
 
-    // get the description
+    // get the pieces
     let fullDescription = phrases.getDescription.call(phrases);
 
     // create the full description
